@@ -95,37 +95,6 @@ LOCK TABLES `compra` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `funcionario`
---
-
-DROP TABLE IF EXISTS `funcionario`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `funcionario` (
-  `nome` varchar(40) NOT NULL,
-  `cpf` varchar(14) NOT NULL,
-  `endereco` varchar(100) DEFAULT NULL,
-  `telefone` varchar(20) DEFAULT NULL,
-  `codigo_categoria` int(11) NOT NULL,
-  `login` varchar(40) NOT NULL,
-  `senha` varchar(16) NOT NULL,
-  `codigo` int(1) NOT NULL,
-  PRIMARY KEY (`codigo`),
-  KEY `codigo_categoria` (`codigo_categoria`),
-  CONSTRAINT `funcionario_ibfk_1` FOREIGN KEY (`codigo_categoria`) REFERENCES `categoria` (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `funcionario`
---
-
-LOCK TABLES `funcionario` WRITE;
-/*!40000 ALTER TABLE `funcionario` DISABLE KEYS */;
-/*!40000 ALTER TABLE `funcionario` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `servicos`
 --
 
@@ -194,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-31 19:54:44
+-- Dump completed on 2016-09-01 20:20:10
