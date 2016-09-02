@@ -23,15 +23,12 @@ DROP TABLE IF EXISTS `atende`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `atende` (
-  `cod_funcionario` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  `id_servicos` int(11) DEFAULT NULL,
-  KEY `cod_funcionario` (`cod_funcionario`),
-  KEY `id_usuario` (`id_usuario`),
-  KEY `id_servicos` (`id_servicos`),
-  CONSTRAINT `atende_ibfk_1` FOREIGN KEY (`cod_funcionario`) REFERENCES `funcionario` (`codigo`),
-  CONSTRAINT `atende_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
-  CONSTRAINT `atende_ibfk_3` FOREIGN KEY (`id_servicos`) REFERENCES `servicos` (`id_servicos`)
+  `usuario_id` int(11) NOT NULL,
+  `servico_id` int(11) NOT NULL,
+  KEY `usuario_id` (`usuario_id`),
+  KEY `servico_id` (`servico_id`),
+  CONSTRAINT `atende_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `atende_ibfk_2` FOREIGN KEY (`servico_id`) REFERENCES `servicos` (`id_servicos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -69,32 +66,6 @@ INSERT INTO `categoria` VALUES ('administrador',1),('funcionario',2),('aluno',3)
 UNLOCK TABLES;
 
 --
--- Table structure for table `compra`
---
-
-DROP TABLE IF EXISTS `compra`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `compra` (
-  `id_usuario` int(11) DEFAULT NULL,
-  `id_servico` int(11) DEFAULT NULL,
-  KEY `id_usuario` (`id_usuario`),
-  KEY `id_servico` (`id_servico`),
-  CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
-  CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_servico`) REFERENCES `servicos` (`id_servicos`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `compra`
---
-
-LOCK TABLES `compra` WRITE;
-/*!40000 ALTER TABLE `compra` DISABLE KEYS */;
-/*!40000 ALTER TABLE `compra` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `servicos`
 --
 
@@ -103,10 +74,10 @@ DROP TABLE IF EXISTS `servicos`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `servicos` (
   `nome` varchar(40) NOT NULL,
-  `preco` double NOT NULL,
   `id_servicos` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(200) NOT NULL,
   PRIMARY KEY (`id_servicos`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,6 +86,7 @@ CREATE TABLE `servicos` (
 
 LOCK TABLES `servicos` WRITE;
 /*!40000 ALTER TABLE `servicos` DISABLE KEYS */;
+INSERT INTO `servicos` VALUES ('CrossFit',1,'Segunda (08:00 as 11:00) - Quarta (07:00 as 10:00) - Sexta (08:00 as 12:00)');
 /*!40000 ALTER TABLE `servicos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,22 +98,22 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(40) NOT NULL,
-  `cpf` varchar(14) NOT NULL,
-  `rg` varchar(10) NOT NULL,
-  `telefone` varchar(16) NOT NULL,
+  `telefone` varchar(20) NOT NULL,
+  `cpf` varchar(16) NOT NULL,
+  `rg` varchar(14) NOT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `data_nascimento` date DEFAULT NULL,
-  `email` varchar(70) NOT NULL,
   `sexo` char(1) NOT NULL,
+  `email` varchar(60) NOT NULL,
   `login` varchar(40) NOT NULL,
   `senha` varchar(16) NOT NULL,
-  `id_usuario` int(1) NOT NULL,
   `cod_categoria` int(1) NOT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `cod_categoria` (`cod_categoria`),
-  CONSTRAINT `cod_categoria` FOREIGN KEY (`cod_categoria`) REFERENCES `categoria` (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`cod_categoria`) REFERENCES `categoria` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +122,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('Luiz','113.687.264-70','9.310.419','(81)98933-0737','rua T','1997-11-04','luiz@hotmail.com','M','luizinho','1234',0,0);
+INSERT INTO `usuario` VALUES (1,'tiago','5454452121','896587','9368','rua z','1997-11-04','M','tiago@hotmail.com','tiago','123',3),(2,'luiz','(81) 9893-30737','113.687.264-70','9.310.419','rua Tamoio','1997-11-04','M','luiz@hotmail.com','luiz','1234',3),(3,'xico','(81) 9893-30713','987.652.231-21','9.865.785','Rua xxxx','1997-11-04','M','xico@hotmail.com','xico','123',2),(4,'marcelo','(81) 8998-11981','123.132.132-13','9.815.156','rua piedade','9656-08-05','M','marcelo@hotmail.com','marcelo','123',3),(6,'havana','81989330737','11368726470','9310419','rua z','1997-11-04','f','havana@hotmail.com','havana','1234',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -163,4 +135,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-01 20:20:10
+-- Dump completed on 2016-09-02 16:15:51
