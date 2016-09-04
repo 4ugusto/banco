@@ -113,7 +113,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id_usuario`),
   KEY `cod_categoria` (`cod_categoria`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`cod_categoria`) REFERENCES `categoria` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'tiago','5454452121','896587','9368','rua z','1997-11-04','M','tiago@hotmail.com','tiago','123',3),(2,'luiz','(81) 9893-30737','113.687.264-70','9.310.419','rua Tamoio','1997-11-04','M','luiz@hotmail.com','luiz','1234',3),(3,'xico','(81) 9893-30713','987.652.231-21','9.865.785','Rua xxxx','1997-11-04','M','xico@hotmail.com','xico','123',2),(4,'marcelo','(81) 8998-11981','123.132.132-13','9.815.156','rua piedade','9656-08-05','M','marcelo@hotmail.com','marcelo','123',3),(6,'havana','81989330737','11368726470','9310419','rua z','1997-11-04','f','havana@hotmail.com','havana','1234',1);
+INSERT INTO `usuario` VALUES (1,'tiago','5454452121','896587','9368','rua z','1997-11-04','M','tiago@hotmail.com','tiago','123',3),(2,'luiz','(81) 9893-30737','113.687.264-70','9.310.419','rua Tamoio','1997-11-04','M','luiz@hotmail.com','luiz','1234',3),(3,'xico','(81) 9893-30713','987.652.231-21','9.865.785','Rua xxxx','1997-11-04','M','xico@hotmail.com','xico','123',2),(4,'marcelo','(81) 8998-11981','123.132.132-13','9.815.156','rua piedade','9656-08-05','M','marcelo@hotmail.com','marcelo','123',3),(6,'havana','81989330737','11368726470','9310419','rua z','1997-11-04','f','havana@hotmail.com','havana','1234',1),(7,'adm','','0','',NULL,'1991-09-19','M','adm@hotmail.com','adm','1234',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -135,4 +135,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-02 16:15:51
+-- Dump completed on 2016-09-04 17:55:46
